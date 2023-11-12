@@ -62,7 +62,7 @@ process_abstract <- function(abstract, topic) {
 
 
 # Process each abstract and store results
-results <- lapply(seq_len(nrow(data)), function(i) process_abstract(data[i, ], topic_to_check))
+results <- future_lapply(seq_len(nrow(data)), function(i) process_abstract(data[i, ], topic_to_check))
 
 # Combine results with original data
 data$discussed_species <- sapply(results, `[[`, "discussed")

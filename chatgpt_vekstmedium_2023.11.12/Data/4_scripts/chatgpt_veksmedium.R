@@ -1,9 +1,10 @@
 # library ---------------------------------------------------------------------------------------------------------------------------------------
-pckgs=c("httr","jsonlite","tidyverse","rio");for(i in 1:length(pckgs))if(!require(pckgs[i],character.only = TRUE)){install.packages(pckgs[i])}
+pckgs=c("httr","jsonlite","tidyverse","rio", "future.apply");for(i in 1:length(pckgs))if(!require(pckgs[i],character.only = TRUE)){install.packages(pckgs[i])}
 
 library(httr)
 library(jsonlite)
 library(tidyverse)
+library(future.apply)
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 df<- rio::import("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/dataset.txt") %>% as_tibble()
@@ -15,14 +16,13 @@ df <- df %>%
 # subset test data 
 data <- df %>% select(ID, title_abs)
 names(data) <-c("ID", "abstract")
-data <- data[1:10,]
 
 # setup -----------------------------------------------------------------------------------------------------------------------------------------
 api_key_file_path <- file.path("C:/Users/dafl/Desktop/chatgpt_apikey.txt")
 
 api_key <- readLines(api_key_file_path, warn = FALSE)
 
-# Initialize a counter --------------------------------------------------------------------------------------------------------------------------
+# counter --------------------------------------------------------------------------------------------------------------------------
 
 counter <- 0
 total <- nrow(data)
@@ -90,7 +90,11 @@ topic_to_check <- "soil or other other growing media"
 
 # process ---------------------------------------------------------------------------------------------------------------------------------------
 # Process each abstract and store results
-results <- lapply(data$abstract, process_abstract, topic = topic_to_check)
+
+plan(multisession)  # Choose a plan that uses available cores
+
+# Process each abstract and store results in parallel
+results <- future_lapply(data$abstract, process_abstract, topic = topic_to_check)
 
 # finalize --------------------------------------------------------------------------------------------------------------------------------------
 
