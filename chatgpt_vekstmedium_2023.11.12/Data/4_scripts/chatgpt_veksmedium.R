@@ -10,7 +10,7 @@ df <- df %>%
   group_by(ID) %>%
   mutate(title_abs=paste0(Title, Abstract)) 
 
-# subset
+# subset test data 
 data <- df %>% select(ID, title_abs)
 names(data) <-c("ID", "abstract")
 data <- data[1:10,]

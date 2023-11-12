@@ -4,8 +4,8 @@ library(jsonlite)
 library(tidyverse)
 library(rio)
 
-# Read dataset and prepare data frame
-# this uses the dataset from the chatgpt_vekstmedium.R script and only processes the ones refering to soil and growing media 
+# Read data set and prepare data frame
+# this uses the data set from the chatgpt_vekstmedium.R script and only processes the ones referring to soil and growing media 
 data
 
 # Read API key from file
