@@ -24,12 +24,16 @@ call_chat_gpt <- function(prompt) {
     body = toJSON(list(model = "gpt-3.5-turbo", messages = list(list(role = "system", content = "Start Chat"), list(role = "user", content = prompt))), auto_unbox = TRUE),
     encode = "json"
   )
+  Sys.sleep(sample(1:3, 1))
+  
   
   if (response$status_code != 200) stop("API call failed: ", response$status_code)
   result <- fromJSON(rawToChar(response$content), simplifyVector = FALSE)
   if (is.null(result$choices[[1]]$message$content)) stop("Message content not found.")
   result$choices[[1]]$message$content
+  
 }
+
 
 # Function to identify and list species
 identify_species <- function(abstract) {
@@ -58,6 +62,7 @@ process_abstract <- function(abstract, topic) {
   }
   
   return(list(discussed = discussed, species_list = species_list))
+  
 }
 
 

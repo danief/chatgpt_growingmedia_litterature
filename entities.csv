@@ -1,0 +1,15 @@
+Text,Label
+one year-old,DATE
+two year-old,DATE
+English,LANGUAGE
+Quercus robur L.,PERSON
+first,ORDINAL
+the first year,DATE
+50,CARDINAL
+50,CARDINAL
+three,CARDINAL
+five,CARDINAL
+1%,PERCENT
+2%,PERCENT
+3% and 5%,PERCENT
+2%,PERCENT

@@ -5,6 +5,10 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 library(future.apply)
+
+
+Sys.setlocale("LC_ALL", "en_US.UTF-8") # Set system locale to UTF-8
+
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 df<- rio::import("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/dataset.txt") %>% as_tibble()
@@ -56,7 +60,9 @@ call_chat_gpt <- function(prompt) {
   } else {
     stop("Message content not found in response.")
   }
+  Sys.sleep(sample(1:3, 1))
 }
+
 
 # Function to process a text abstract -----------------------------------------------------------------------------------------------------------
 
@@ -92,7 +98,7 @@ topic_to_check <- "soil or other other growing media"
 # Process each abstract and store results
 
 plan(multisession)  # Choose a plan that uses available cores
-
+future.seed = TRUE
 # Process each abstract and store results in parallel
 results <- future_lapply(data$abstract, process_abstract, topic = topic_to_check)
 
