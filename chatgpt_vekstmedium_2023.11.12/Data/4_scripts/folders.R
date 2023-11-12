@@ -1,5 +1,7 @@
 
-vkm_data <- function(input = "vkm_data", is.SLR = FALSE, search.num = 1) {
+# Only run once
+
+# vkm_data <- function(input = "vkm_data", is.SLR = FALSE, search.num = 1) {
   newdir <- paste0(getwd(), "/", input, format(Sys.Date(), "_%Y.%m.%d"))
   
   # Check if directory already exists

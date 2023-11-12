@@ -1,4 +1,6 @@
 # library ---------------------------------------------------------------------------------------------------------------------------------------
+pckgs=c("httr","jsonlite","tidyverse","rio");for(i in 1:length(pckgs))if(!require(pckgs[i],character.only = TRUE)){install.packages(pckgs[i])}
+
 library(httr)
 library(jsonlite)
 library(tidyverse)
