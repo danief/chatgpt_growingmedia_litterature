@@ -10,6 +10,11 @@ df <- df %>%
   group_by(ID) %>%
   mutate(title_abs=paste0(Title, Abstract)) 
 
+# subset
+data <- df %>% select(ID, title_abs)
+names(data) <-c("ID", "abstract")
+data <- data[1:10,]
+
 # setup -----------------------------------------------------------------------------------------------------------------------------------------
 api_key_file_path <- file.path("C:/Users/dafl/Desktop/chatgpt_apikey.txt")
 
@@ -76,11 +81,6 @@ process_abstract <- function(abstract, topic) {
   # Return a list with the discussed response and summary
   return(list(discussed = discussed, summary = summary))
 }
-
-# Data ------------------------------------------------------------------------------------------------------------------------------------------
-data <- df %>% select(ID, title_abs)
-names(data) <-c("ID", "abstract")
-data <- data[1:10,]
 
 # Topic to check --------------------------------------------------------------------------------------------------------------------------------
 

@@ -5,10 +5,8 @@ library(tidyverse)
 library(rio)
 
 # Read dataset and prepare data frame
-df <- import("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/dataset.txt") %>% as_tibble()
-df <- df %>%
-  group_by(ID) %>%
-  mutate(title_abs = paste0(Title, Abstract)) 
+# this uses the dataset from the chatgpt_vekstmedium.R script and only processes the ones refering to soil and growing media 
+data
 
 # Read API key from file
 api_key_file_path <- file.path("C:/Users/dafl/Desktop/chatgpt_apikey.txt")
@@ -16,7 +14,7 @@ api_key <- readLines(api_key_file_path, warn = FALSE)
 
 # Initialize a counter
 counter <- 0
-total <- nrow(df)
+total <- nrow(data)
 
 # Function to call the ChatGPT API
 call_chat_gpt <- function(prompt) {
@@ -62,10 +60,6 @@ process_abstract <- function(abstract, topic) {
   return(list(discussed = discussed, species_list = species_list))
 }
 
-# Data preparation
-data <- df %>% select(ID, title_abs)
-names(data) <- c("ID", "abstract")
-data <- data[1:10,]
 
 # Process each abstract and store results
 results <- lapply(seq_len(nrow(data)), function(i) process_abstract(data[i, ], topic_to_check))
@@ -75,7 +69,7 @@ data$discussed_species <- sapply(results, `[[`, "discussed")
 data$species_list <- sapply(results, `[[`, "species_list")
 
 # Export to Excel
-export(as_tibble(data), "./chatgpt_vekstmedium_2023.11.12/Data/2_processed_data/chatgpt_species_identification.xlsx")
+export(data, "./chatgpt_vekstmedium_2023.11.12/Data/2_processed_data/chatgpt_species_identification.xlsx")
 
 # Print final data frame
 print(as_tibble(data))
