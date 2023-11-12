@@ -1,23 +1,17 @@
 ---
-title: "Species Identification from Abstracts"
+title: "Soil and Species Identification from Abstracts, using ChatGPT"
 author: "Daniel Flø"
 date: "2023-11-12"
 output: github_document
 ---
 
-## Identification of Soil or Growing Media Discussion
+## Identification of Soil or Growing Media fraom Abstracts
 
-The script is designed to recognize and flag abstracts that discuss "soil or growing media." This is an important step in the script because the mention of soil or growing media in the abstract may indicate research related to agriculture, ecology, or environmental science. The identification process is crucial for filtering the dataset to those abstracts that are relevant to the topic of interest. This filtered set of abstracts is then further analyzed for species identification, which can provide insights into biodiversity, conservation efforts, or the study of ecosystems.
+The script is designed to recognize and flag abstracts that discuss "soil or other growing media." The identification is crucial for filtering the dataset to those abstracts that are relevant to the topic of interest. This filtered set of abstracts is then further analyzed for species identification. 
 
 The function `process_abstract` is responsible for this identification. It uses a regular expression search to determine whether the abstract contains the phrases "soil" or "growing media." If the abstract is relevant, it proceeds to summarize the content and identify species. This targeted approach ensures that the output is focused and relevant to researchers or readers interested in the intersection of species and their growing environments.
 
-## Further Analysis
-
 For abstracts that discuss soil or growing media, the script offers an additional layer of analysis by identifying the specific species mentioned. This dual focus on topic relevance and species identification provides a comprehensive view of the abstract's content, making the script a valuable tool for researchers who are sorting through large volumes of literature to find pertinent studies.
-
-## Overview
-
-The script reads a dataset of abstracts, checks if each abstract discusses "soil or growing media", and identifies the species mentioned. The results are stored in a new data frame with species listed in separate columns and then exported to an Excel file.
 
 ## Requirements
 
