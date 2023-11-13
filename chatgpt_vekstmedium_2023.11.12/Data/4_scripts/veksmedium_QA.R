@@ -49,7 +49,6 @@ answer_question <- function(abstract, question, model="gpt-3.5-turbo", max_token
 # Example usage of the function
 data$answer <- sapply(data$abstract, answer_question, question="What type of soil or other growing media are discussed?", max_tokens=150)
 
-
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 rio::export(data, "./chatgpt_vekstmedium_2023.11.12/Data/2_processed_data/chatgpt_vksmedium_QA.xlsx")
