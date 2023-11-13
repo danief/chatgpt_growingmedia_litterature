@@ -1,4 +1,5 @@
-Soil and Species Identification from Abstracts, using ChatGPT
+Soil and Species Identification from Abstracts, using BERTopic and
+ChatGPT
 ================
 Daniel Flø
 2023-11-12

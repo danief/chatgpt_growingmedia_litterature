@@ -1,5 +1,5 @@
 ---
-title: "Soil and Species Identification from Abstracts, using ChatGPT"
+title: "Soil and Species Identification from Abstracts, using BERTopic and ChatGPT"
 author: "Daniel Flø"
 date: "2023-11-12"
 output: github_document
