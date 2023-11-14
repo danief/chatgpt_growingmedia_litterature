@@ -101,6 +101,7 @@ plan(multisession)  # Choose a plan that uses available cores
 future.seed = TRUE
 # Process each abstract and store results in parallel
 results <- future_lapply(data$abstract, process_abstract, topic = topic_to_check)
+results <- lapply(data$abstract, process_abstract, topic = topic_to_check)
 
 # finalize --------------------------------------------------------------------------------------------------------------------------------------
 
