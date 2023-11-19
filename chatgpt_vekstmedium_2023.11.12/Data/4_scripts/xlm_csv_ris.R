@@ -4,7 +4,7 @@ library(xml2)
 library(dplyr)
 dir("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/")
 # Read the XML file
-xml_data <- read_xml("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/vekstmedier_test2.xml")
+xml_data <- read_xml("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/vekstmedier_test3.xml")
 
 # Extract the records
 records <- xml_find_all(xml_data, "//record")
