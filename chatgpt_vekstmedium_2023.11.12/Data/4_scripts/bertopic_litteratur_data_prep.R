@@ -1,7 +1,8 @@
 
 library(tidyverse)
+library(tidytext)
 
-df<- rio::import("dataset.txt") %>% as_tibble()
+df<- rio::import("./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/dataset.txt") %>% as_tibble()
 
 as_tibble(df)
 
@@ -34,19 +35,17 @@ clean_text <- filer %>%
   summarize(clean_sentence = str_c(word, collapse = " ")) %>%
   ungroup()
 
-rio::export(clean_text, "text.txt")
+rio::export(clean_text, "./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/bert_text.txt")
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 # best practice 
-text <- df %>% select(V4, V39) 
+text <- df %>% select(Title, Abstract) 
 
 names(text) <- c("title", "abstract" )
 
-rio::export(text, "dataset.txt")
-
+rio::export(text, "./chatgpt_vekstmedium_2023.11.12/Data/1_raw_data/bert_dataset.csv")
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 # se python script for å kjøre bertopic
-
