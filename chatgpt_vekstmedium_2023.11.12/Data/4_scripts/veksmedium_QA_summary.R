@@ -19,7 +19,9 @@ transformers <- reticulate::import("transformers")
 classifier <- transformers$pipeline(task = "text-classification")
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
-text <- as.list(data$abstract)
+text <- df %>%   mutate(title_abs=paste0(Title, Abstract, sep=" ")) 
+
+text <- as.list(text$title_abs)
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,22 +29,22 @@ text <- as.list(data$abstract)
 reader <- transformers$pipeline(task = "question-answering",
                                 model = "deepset/roberta-base-squad2")
 
-# Question i want answered
+# Question 
 question <- "what types of soil or growing media is mentioned in the text?"
 
-# Assuming `texts` is a vector containing your text data
+#  lapply all the texts in the list over question 
 
 outputs_list <- lapply(text, function(text) {
   reader(question = question, context = text)
 })
 
-# Optionally convert the list of outputs to a tibble/data frame for easier viewing/analysis
+#  convert the list of outputs to a data frame 
 outputs_df <- do.call(rbind, lapply(outputs_list, as.data.frame))
 
 as_tibble(outputs_df)
 
-outputs_df <- bind_cols(data, outputs_df)
+outputs_df <- bind_cols(df, outputs_df)
 
-rio::export(outputs_df, "./chatgpt_vekstmedium_2023.11.12/Data/2_processed_data/outputs_df.xlsx")
+rio::export(outputs_df, "./chatgpt_vekstmedium_2023.11.12/Data/2_processed_data/outputs_df_roberta.xlsx")
 
 # End -------------------------------------------------------------------------------------------------------------------------------------------
